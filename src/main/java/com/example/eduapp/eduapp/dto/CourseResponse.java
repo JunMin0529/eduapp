@@ -2,7 +2,6 @@ package com.example.eduapp.eduapp.dto;
 
 import com.example.eduapp.eduapp.domain.Application;
 import com.example.eduapp.eduapp.domain.Course;
-import com.example.eduapp.eduapp.domain.Employee;
 import lombok.Data;
 
 import java.time.LocalDateTime;
