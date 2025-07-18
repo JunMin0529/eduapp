@@ -29,9 +29,9 @@ public class EmployeeControllerTest extends RestDoc {
     public void save_test() throws Exception {
         // given
         EmployeeRequest.SaveDTO reqDTO = new EmployeeRequest.SaveDTO();
-        reqDTO.setName("편준민");
+        reqDTO.setName("홍길동");
         reqDTO.setDepartment("개발과");
-        reqDTO.setEmail("lsaoe157@naver.com");
+        reqDTO.setEmail("lsaoe157@gamil.com");
 
         String requestBody = om.writeValueAsString(reqDTO);
 //        System.out.println(requestBody);
@@ -50,9 +50,9 @@ public class EmployeeControllerTest extends RestDoc {
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200));
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.msg").value("성공"));
 
-        actions.andExpect(MockMvcResultMatchers.jsonPath("$.data.name").value("편준민"));
+        actions.andExpect(MockMvcResultMatchers.jsonPath("$.data.name").value("홍길동"));
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.data.department").value("개발과"));
-        actions.andExpect(MockMvcResultMatchers.jsonPath("$.data.email").value("lsaoe157@naver.com"));
+        actions.andExpect(MockMvcResultMatchers.jsonPath("$.data.email").value("lsaoe157@gamil.com"));
 
         actions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
