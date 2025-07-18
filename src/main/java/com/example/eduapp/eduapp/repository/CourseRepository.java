@@ -1,7 +1,6 @@
 package com.example.eduapp.eduapp.repository;
 
 import com.example.eduapp.eduapp.domain.Course;
-import com.example.eduapp.eduapp.domain.Employee;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,5 +20,16 @@ public class CourseRepository {
     public Optional<Course> findById(Long courseId) {
         Course coursePS = em.find(Course.class, courseId);
         return Optional.ofNullable(coursePS);
+    }
+
+    public Optional<Course> findByTitle(String title) {
+        try {
+            Course course = em.createQuery("select c from Course c where c.title = :title", Course.class)
+                    .setParameter("title", title)
+                    .getSingleResult();
+            return Optional.of(course);
+        } catch (Exception e) {
+            return Optional.ofNullable(null);
+        }
     }
 }

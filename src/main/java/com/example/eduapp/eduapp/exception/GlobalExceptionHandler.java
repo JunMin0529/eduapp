@@ -1,10 +1,7 @@
 package com.example.eduapp.eduapp.exception;
 
 import com.example.eduapp.eduapp._core.utils.Resp;
-import com.example.eduapp.eduapp.exception.ex.ExceptionApi400;
-import com.example.eduapp.eduapp.exception.ex.ExceptionApi401;
-import com.example.eduapp.eduapp.exception.ex.ExceptionApi403;
-import com.example.eduapp.eduapp.exception.ex.ExceptionApi404;
+import com.example.eduapp.eduapp.exception.ex.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,5 +34,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> exApi404(ExceptionApi404 e) {
         log.warn(e.getMessage());
         return Resp.fail(HttpStatus.NOT_FOUND, e.getMessage());
+    }
+
+    @ExceptionHandler(ExceptionApi409.class)
+    public ResponseEntity<?> exApi404(ExceptionApi409 e) {
+        log.warn(e.getMessage());
+        return Resp.fail(HttpStatus.CONFLICT, e.getMessage());
     }
 }

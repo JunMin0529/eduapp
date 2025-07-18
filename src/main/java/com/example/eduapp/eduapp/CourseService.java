@@ -2,20 +2,18 @@ package com.example.eduapp.eduapp;
 
 import com.example.eduapp.eduapp.domain.Application;
 import com.example.eduapp.eduapp.domain.Course;
-import com.example.eduapp.eduapp.domain.Employee;
 import com.example.eduapp.eduapp.dto.CourseRequest;
 import com.example.eduapp.eduapp.dto.CourseResponse;
-import com.example.eduapp.eduapp.dto.EmployeeRequest;
-import com.example.eduapp.eduapp.dto.EmployeeResponse;
+import com.example.eduapp.eduapp.exception.ex.ExceptionApi400;
 import com.example.eduapp.eduapp.repository.ApplicationRepository;
 import com.example.eduapp.eduapp.repository.CourseRepository;
-import com.example.eduapp.eduapp.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +23,12 @@ public class CourseService {
 
     @Transactional
     public CourseResponse.SaveDTO save(CourseRequest.SaveDTO reqDTO) {
+        Optional<Course> courseOptional = courseRepository.findByTitle(reqDTO.getTitle());
+
+        if (courseOptional.isPresent()) {
+            throw new ExceptionApi400("이미 있는 교육입니다.");
+        }
+
         Course savePS = courseRepository.save(reqDTO.toEntity());
         return new CourseResponse.SaveDTO(savePS);
     }

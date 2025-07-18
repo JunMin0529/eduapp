@@ -4,6 +4,7 @@ import com.example.eduapp.eduapp.domain.Application;
 import com.example.eduapp.eduapp.domain.Employee;
 import com.example.eduapp.eduapp.dto.EmployeeRequest;
 import com.example.eduapp.eduapp.dto.EmployeeResponse;
+import com.example.eduapp.eduapp.exception.ex.ExceptionApi400;
 import com.example.eduapp.eduapp.repository.ApplicationRepository;
 import com.example.eduapp.eduapp.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +23,14 @@ public class EmployeeService {
 
     @Transactional
     public EmployeeResponse.SaveDTO save(EmployeeRequest.SaveDTO reqDTO) {
+
+        Optional<Employee> employeeOptional = employeeRepository.findByEmail(reqDTO.getEmail());
+
+        if (employeeOptional.isPresent()) {
+            throw new ExceptionApi400("이미 사용 중인 이메일입니다.");
+        }
         Employee savePS = employeeRepository.save(reqDTO.toEntity());
+
         return new EmployeeResponse.SaveDTO(savePS);
     }
 

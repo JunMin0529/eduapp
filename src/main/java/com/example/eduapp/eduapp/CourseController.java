@@ -1,12 +1,13 @@
 package com.example.eduapp.eduapp;
 
 import com.example.eduapp.eduapp._core.utils.Resp;
-import com.example.eduapp.eduapp.domain.Course;
 import com.example.eduapp.eduapp.dto.CourseRequest;
 import com.example.eduapp.eduapp.dto.CourseResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class CourseController {
     private final CourseService courseService;
 
     @PostMapping("/courses")
-    public ResponseEntity<?> save(@RequestBody CourseRequest.SaveDTO reqDTO) {
+    public ResponseEntity<?> save(@Valid @RequestBody CourseRequest.SaveDTO reqDTO, Errors errors) {
         CourseResponse.SaveDTO respDTO = courseService.save(reqDTO);
         return Resp.ok(respDTO);
     }

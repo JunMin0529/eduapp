@@ -13,6 +13,7 @@ public class EmployeeRequest {
         private String name;
         @NotBlank(message = "부서 이름은 필수입니다.")
         private String department;
+        @NotBlank(message = "이메일은 필수입니다.")
         @Email
         private String email;
 

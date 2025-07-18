@@ -5,7 +5,6 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -21,5 +20,16 @@ public class EmployeeRepository {
     public Optional<Employee> findById(Long employeeId) {
         Employee employeePS = em.find(Employee.class, employeeId);
         return Optional.ofNullable(employeePS);
+    }
+
+    public Optional<Employee> findByEmail(String email) {
+        try {
+            Employee employee = em.createQuery("select e from Employee e where e.email = :email", Employee.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+            return Optional.of(employee);
+        } catch (Exception e) {
+            return Optional.ofNullable(null);
+        }
     }
 }
