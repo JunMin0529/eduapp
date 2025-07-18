@@ -1,5 +1,6 @@
 package com.example.eduapp.eduapp.repository;
 
+import com.example.eduapp.eduapp.domain.Course;
 import com.example.eduapp.eduapp.domain.Employee;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -7,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class EmployeeRepository {
+public class CourseRepository {
     private final EntityManager em;
 
-    public Employee save(Employee employee) {
-        em.persist(employee);
-        return (employee);
+    public Course save(Course course) {
+        em.persist(course);
+        return (course);
     }
 }

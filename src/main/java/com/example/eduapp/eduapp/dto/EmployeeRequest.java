@@ -1,7 +1,6 @@
 package com.example.eduapp.eduapp.dto;
 
 import com.example.eduapp.eduapp.domain.Employee;
-import lombok.Builder;
 import lombok.Data;
 
 public class EmployeeRequest {
