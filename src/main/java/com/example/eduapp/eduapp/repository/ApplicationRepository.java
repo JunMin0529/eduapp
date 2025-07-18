@@ -1,7 +1,6 @@
 package com.example.eduapp.eduapp.repository;
 
 import com.example.eduapp.eduapp.domain.Application;
-import com.example.eduapp.eduapp.domain.Course;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +39,13 @@ public class ApplicationRepository {
                 .setParameter("courseId", courseId)
                 .getSingleResult();
         return count > 0;
+    }
+
+    // 정원 체크
+    public long countByCourseId(Long courseId) {
+        return em.createQuery(
+                        "select count(a) from Application a where a.course.id = :courseId", Long.class)
+                .setParameter("courseId", courseId)
+                .getSingleResult();
     }
 }

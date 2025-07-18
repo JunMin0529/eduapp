@@ -5,8 +5,6 @@ import com.example.eduapp.eduapp.domain.Course;
 import com.example.eduapp.eduapp.domain.Employee;
 import com.example.eduapp.eduapp.dto.ApplicationRequest;
 import com.example.eduapp.eduapp.dto.ApplicationResponse;
-import com.example.eduapp.eduapp.dto.CourseRequest;
-import com.example.eduapp.eduapp.dto.CourseResponse;
 import com.example.eduapp.eduapp.repository.ApplicationRepository;
 import com.example.eduapp.eduapp.repository.CourseRepository;
 import com.example.eduapp.eduapp.repository.EmployeeRepository;
@@ -28,6 +26,13 @@ public class ApplicationService {
 
         Course coursePS = courseRepository.findById(reqDTO.getCourseId())
                 .orElseThrow(() -> new RuntimeException("해당 강좌를 찾을 수 없습니다."));
+
+        // 현재 신청자 수 조회
+        long currentApplicants = applicationRepository.countByCourseId(coursePS.getId());
+
+        if (coursePS.getCapacity() != null && currentApplicants >= coursePS.getCapacity()) {
+            throw new IllegalStateException("정원이 가득 찼습니다.");
+        }
 
         Application savePS = applicationRepository.save(reqDTO.toEntity(employeePS, coursePS));
 
