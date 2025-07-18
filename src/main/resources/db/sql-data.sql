@@ -1,6 +1,7 @@
 INSERT INTO employee_tb (name, department, email)
 VALUES ('ssar', '백엔드 개발자', 'hong@example.com'),
-       ('cos', '프론트엔드 개발자', 'lee@example.com');
+       ('cos', '프론트엔드 개발자', 'lee@example.com'),
+       ('편준민', '백엔드 개발자', 'lsaoe157@naver.com');
 
 INSERT INTO course_tb (title, description, capacity, created_at)
 VALUES ('Spring Boot 입문', 'Spring Boot의 기본 개념과 실습', 1, CURRENT_TIMESTAMP),

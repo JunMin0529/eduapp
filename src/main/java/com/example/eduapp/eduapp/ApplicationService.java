@@ -29,6 +29,11 @@ public class ApplicationService {
         Course coursePS = courseRepository.findById(reqDTO.getCourseId())
                 .orElseThrow(() -> new ExceptionApi400("해당 강좌를 찾을 수 없습니다."));
 
+        // 중복 신청 방지
+        if (applicationRepository.existsByEmployeeIdAndCourseId(employeePS.getId(), coursePS.getId())) {
+            throw new ExceptionApi400("이미 신청한 과목입니다.");
+        }
+
         // 현재 신청자 수 조회
         long currentApplicants = applicationRepository.countByCourseId(coursePS.getId());
 
