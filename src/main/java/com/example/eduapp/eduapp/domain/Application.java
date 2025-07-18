@@ -16,11 +16,11 @@ public class Application {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_tb")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Course_tb")
+    @JoinColumn(name = "course_id")
     private Course course;
 
     @CreationTimestamp

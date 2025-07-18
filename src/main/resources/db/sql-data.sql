@@ -1,4 +1,4 @@
-INSERT INTO employee_tb (name, description, email)
+INSERT INTO employee_tb (name, department, email)
 VALUES ('ssar', '백엔드 개발자', 'hong@example.com'),
        ('cos', '프론트엔드 개발자', 'lee@example.com');
 
