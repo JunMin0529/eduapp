@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @PostMapping("/employee")
+    @PostMapping("/employees")
     public ResponseEntity<?> save(@RequestBody EmployeeRequest.SaveDTO reqDTO) {
         EmployeeResponse.SaveDTO respDTO = employeeService.save(reqDTO);
         return Resp.ok(respDTO);
