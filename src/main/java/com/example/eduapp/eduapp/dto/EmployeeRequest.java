@@ -1,6 +1,7 @@
 package com.example.eduapp.eduapp.dto;
 
 import com.example.eduapp.eduapp.domain.Employee;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ public class EmployeeRequest {
         private String name;
         @NotBlank(message = "부서 이름은 필수입니다.")
         private String department;
+        @Email
         private String email;
 
         public Employee toEntity() {

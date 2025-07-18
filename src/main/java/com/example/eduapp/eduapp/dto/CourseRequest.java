@@ -12,6 +12,7 @@ public class CourseRequest {
         private String title;
         @NotBlank(message = "과정 설명은 필수입니다.")
         private String description;
+        @NotBlank(message = "정원 인원은 필수입니다.")
         private Integer capacity;
 
         public Course toEntity() {
